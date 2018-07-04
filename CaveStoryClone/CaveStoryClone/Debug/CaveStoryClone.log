@@ -1,0 +1,15 @@
+﻿  Player.cpp
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\slope.h(17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(156): warning C4018: '<': signed/unsigned mismatch
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(165): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(173): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(178): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(181): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(193): warning C4018: '<': signed/unsigned mismatch
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(198): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(204): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(209): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(228): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(233): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  CaveStoryClone.vcxproj -> C:\Users\will.stern\source\repos\CaveStoryClone\Debug\CaveStoryClone.exe
