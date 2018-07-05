@@ -18,9 +18,8 @@ Level::Level()
 
 }
 
-Level::Level(std::string mapName, Vector2 spawnPoint, Graphics &graphics) :
+Level::Level(std::string mapName, Graphics &graphics) :
 	_mapName(mapName),
-	_spawnPoint(spawnPoint),
 	_size(Vector2(0,0))
 {
 	this->LoadMap(mapName, graphics);
@@ -50,7 +49,6 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 	doc.LoadFile(ss.str().c_str());
 
 	XMLElement* mapNode = doc.FirstChildElement("map");
-
 	//Get the width and height of the whole map and store in size variable
 	int width, height;
 	mapNode->QueryIntAttribute("width", &width);
@@ -341,6 +339,54 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 					}
 				}
 			}
+			//Parse through door objects
+			else if (ss.str() == "doors")
+			{
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL)
+				{
+					while (pObject)
+					{
+						float x = pObject->FloatAttribute("x");
+						float y = pObject->FloatAttribute("y");
+						float w = pObject->FloatAttribute("width");
+						float h = pObject->FloatAttribute("height");
+						Rectangle rect = Rectangle(x, y, w, h);
+
+						XMLElement* pProperties = pObject->FirstChildElement("properties");
+						if (pProperties != NULL)
+						{
+							while (pProperties)
+							{
+								XMLElement* pProperty = pProperties->FirstChildElement("property");
+								if (pProperty != NULL)
+								{
+									while (pProperty)
+									{
+										const char* name = pProperty->Attribute("name");
+										std::stringstream ss;
+										ss << name;
+										if (ss.str() == "destination")
+										{
+											const char* value = pProperty->Attribute("value");
+											std::stringstream ss2;
+											ss2 << value;
+											Door door = Door(rect, ss2.str());
+											this->_doorList.push_back(door);
+										}
+
+										pProperty = pProperty->NextSiblingElement("property");
+									}
+								}
+
+								pProperties = pProperties->NextSiblingElement("properties");
+							}
+						}
+
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
 
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
@@ -396,8 +442,29 @@ std::vector<Slope> Level::CheckSlopeCollisions(const Rectangle &other)
 	return others;
 }
 
+std::vector<Door> Level::CheckDoorCollisions(const Rectangle &other)
+{
+	std::vector<Door> others;
+	for (int i = 0; i < this->_doorList.size(); i++)
+	{
+		if (this->_doorList.at(i).CollidesWith(other))
+		{
+			others.push_back(this->_doorList.at(i));
+		}
+	}
+	return others;
+}
+
+//========================== NEEDS WORK =============================================
+//need to modify this in order to allow for multiple player spawn points on one map
+//could add a custom property to spawn points in tiled that clarifies where player is coming from,
+//then parse out those properties and use them in this function
+//SIDE NOTE: could change map 2 so the door at the top is a tile down, so as not to be covered by HUD
 const Vector2 Level::GetPlayerSpawnPoint() const 
 {
+	std::stringstream ss;
+	ss << this->_mapName << "\n";
+	printf(ss.str().c_str());
 	return _spawnPoint;
 }
 

@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="AnimatedTile.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graphics.h" />

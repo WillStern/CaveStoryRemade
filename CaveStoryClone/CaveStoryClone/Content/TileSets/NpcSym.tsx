@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="NpcSym" tilewidth="16" tileheight="16" tilecount="300" columns="20">
  <image source="NpcSym.png" width="320" height="240"/>
+ <tile id="0">
+  <animation>
+   <frame tileid="15" duration="200"/>
+   <frame tileid="16" duration="200"/>
+   <frame tileid="17" duration="200"/>
+  </animation>
+ </tile>
+ <tile id="15">
+  <animation>
+   <frame tileid="15" duration="100"/>
+   <frame tileid="16" duration="100"/>
+   <frame tileid="17" duration="100"/>
+  </animation>
+ </tile>
  <tile id="18">
   <animation>
    <frame tileid="18" duration="10"/>
@@ -17,6 +31,12 @@
    <frame tileid="31" duration="100"/>
    <frame tileid="32" duration="100"/>
    <frame tileid="33" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="122">
+  <animation>
+   <frame tileid="122" duration="100"/>
+   <frame tileid="123" duration="100"/>
   </animation>
  </tile>
 </tileset>

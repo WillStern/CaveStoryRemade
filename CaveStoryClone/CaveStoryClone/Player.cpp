@@ -1,18 +1,19 @@
 #include "Player.h"
 #include "Graphics.h"
+#include "Level.h"
 
 namespace player_constants
 {
 	const float WALK_SPEED = 0.2f;
-	const float JUMP_SPEED = 0.4f;
-	const float GRAVITY = 0.001f;
+	const float JUMP_SPEED = 0.45f;
+	const float GRAVITY = 0.0009f;
 	const float GRAVITY_CAP = 0.5f;
 }
 
 Player::Player() {};
 
 Player::Player(Graphics &graphics, Vector2 spawnPoint) :
-	AnimatedSprite(graphics, "Content/Sprites/MyChar.png", 0, 0, 16, 16, spawnPoint.x, spawnPoint.y, 100),
+	AnimatedSprite(graphics, "Content/Sprites/MyChar.png", 0, 0, 16, 16, (float)spawnPoint.x, (float)spawnPoint.y, 100),
 	_dx(0),
 	_dy(0),
 	_facing(RIGHT),
@@ -162,7 +163,7 @@ void Player::HandleTileCollisions(std::vector<Rectangle> &others)
 			{
 			case sides::TOP:
 				this->_dy = 0;
-				this->_y = others.at(i).GetBottom() + 1;
+				this->_y = (float)others.at(i).GetBottom() + 1.0f;
 				if (this->_grounded)
 				{
 					this->_dx = 0;
@@ -208,6 +209,20 @@ void Player::HandleSlopeCollisions(std::vector<Slope> &others)
 		{
 			this->_y = newY - this->_boundingBox.GetHeight();
 			this->_grounded = true;
+		}
+	}
+}
+
+//Checks if player is grounded and is holding the down arrow
+void Player::HandleDoorCollision(std::vector<Door> &others, Level &level, Graphics &graphics)
+{
+	for (int i = 0; i< others.size(); i++)
+	{
+		if (this->_grounded == true && this->_lookingDown == true)
+		{
+			level = Level(others.at(i).GetDestination(), graphics);
+			this->_x = level.GetPlayerSpawnPoint().x;
+			this->_y = level.GetPlayerSpawnPoint().y;
 		}
 	}
 }

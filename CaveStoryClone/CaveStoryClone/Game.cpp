@@ -31,7 +31,7 @@ void Game::GameLoop()
 	Input input;
 	SDL_Event event;
 
-	this->_level = Level("Map1-new", Vector2(100, 100), graphics);
+	this->_level = Level("Map1-new", graphics);
 	this->_player = Player(graphics, _level.GetPlayerSpawnPoint());
 	this->_hud = HUD(graphics, this->_player);
 
@@ -107,6 +107,8 @@ void Game::GameLoop()
 
 		const int CURRENT_TIME_MS = SDL_GetTicks();
 		int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME; //how long current frame took
+
+		this->_graphics = graphics;
 		this->Update(std::min(ELAPSED_TIME_MS, MAX_FRAME_TIME));
 		LAST_UPDATE_TIME = CURRENT_TIME_MS;
 
@@ -146,5 +148,12 @@ void Game::Update(float elapsedTime)
 	if ((otherSlopes = this->_level.CheckSlopeCollisions(this->_player.GetBoundingBox())).size() > 0)
 	{
 		this->_player.HandleSlopeCollisions(otherSlopes);
+	}
+
+	//check doors
+	std::vector<Door> otherDoors;
+	if ((otherDoors = this->_level.CheckDoorCollisions(this->_player.GetBoundingBox())).size() > 0)
+	{
+		this->_player.HandleDoorCollision(otherDoors, this->_level, this->_graphics);
 	}
 }

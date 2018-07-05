@@ -4,6 +4,7 @@
 #include "Rectangle.h"
 #include "Slope.h"
 #include "AnimatedTile.h"
+#include "Door.h"
 
 #include <string>
 #include <vector>
@@ -18,7 +19,7 @@ class Level
 {
 public:
 	Level();
-	Level(std::string mapName, Vector2 spawnPoint, Graphics &graphics);
+	Level(std::string mapName, Graphics &graphics);
 	~Level();
 
 	void Update(int elapsedTime);
@@ -26,6 +27,7 @@ public:
 
 	std::vector<Rectangle> CheckTileCollisions(const Rectangle &other);
 	std::vector<Slope> CheckSlopeCollisions(const Rectangle &other);
+	std::vector<Door> CheckDoorCollisions(const Rectangle &other);
 
 	const Vector2 GetPlayerSpawnPoint() const;
 private:
@@ -46,6 +48,7 @@ private:
 	std::vector<AnimatedTile> _animatedTileList;
 	std::vector<AnimatedTileInfo> _animatedTileInfos;
 
+	std::vector<Door> _doorList;
 
 	/*LoadMap
 	Loads a map

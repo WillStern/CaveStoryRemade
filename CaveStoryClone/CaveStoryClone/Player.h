@@ -1,6 +1,8 @@
 #pragma once
 #include "AnimatedSprite.h"
 #include "Slope.h"
+#include "Door.h"
+#include "Level.h"
 //forward declare
 class Graphics;
 
@@ -56,6 +58,7 @@ public:
 
 	void HandleTileCollisions(std::vector<Rectangle> &others);
 	void HandleSlopeCollisions(std::vector<Slope> &others);
+	void HandleDoorCollision(std::vector<Door> &others, Level &level, Graphics &graphics);
 
 	const float GetX() const;
 	const float GetY() const;

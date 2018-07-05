@@ -18,4 +18,5 @@ private:
 	Player _player;
 	Level _level;
 	HUD _hud;
+	Graphics _graphics;
 };
