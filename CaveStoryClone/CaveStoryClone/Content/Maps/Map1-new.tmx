@@ -693,9 +693,6 @@
   <object id="28" x="160.334" y="65.6667">
    <polyline points="0,0 15.6667,-4"/>
   </object>
-  <object id="29" x="231.667" y="129.667">
-   <polyline points="0,0 10.6667,-8"/>
-  </object>
  </objectgroup>
  <objectgroup color="#00ff00" name="spawn points">
   <object id="19" name="player" x="158.5" y="127.5" width="4.5" height="4">

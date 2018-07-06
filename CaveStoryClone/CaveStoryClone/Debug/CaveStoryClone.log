@@ -1,15 +1,2 @@
-﻿  AnimatedSprite.cpp
-  AnimatedTile.cpp
-  Enemy.cpp
-  Game.cpp
-  Graphics.cpp
-  HUD.cpp
-  Input.cpp
-  Level.cpp
-  Main.cpp
-  Player.cpp
-  Sprite.cpp
-  Tile.cpp
-  tinyxml2.cpp
-  Generating Code...
+﻿  Level.cpp
   CaveStoryClone.vcxproj -> C:\Users\will.stern\source\repos\CaveStoryClone\Debug\CaveStoryClone.exe
