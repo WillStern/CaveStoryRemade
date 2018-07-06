@@ -61,6 +61,9 @@ public:
 	void HandleSlopeCollisions(std::vector<Slope> &others);
 	void HandleDoorCollision(std::vector<Door> &others, Level &level, Graphics &graphics);
 	void HandleEnemyCollision(std::vector<Enemy*> &others);
+	//=================== NEEDS WORK =======================
+	//add a HandleItemCollision function to check the given list of items
+	//then have the player react according to the type of item
 
 
 	const float GetX() const;

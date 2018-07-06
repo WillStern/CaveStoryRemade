@@ -412,6 +412,12 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 				}
 			}
 
+			//====================== NEEDS WORK ========================
+			//Here could add a new object group in tiled for intractable items
+			//items would include the current map items (health pack, health container, save disk)
+			//group would be "items", the objects in the group would use specific names of the items
+			//when parsing file, (like for enemies) would check specific item names and add to an _itemList accordingly
+
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
 	}

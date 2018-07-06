@@ -55,6 +55,9 @@ private:
 
 	std::vector<Enemy*> _enemies;
 
+	//============== NEEDS WORK ==============
+	//add a _itemList that would contain the items in the level
+
 	/*LoadMap
 	Loads a map
 	*/
