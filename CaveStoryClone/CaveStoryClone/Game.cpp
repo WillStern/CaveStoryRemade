@@ -109,7 +109,7 @@ void Game::GameLoop()
 		int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME; //how long current frame took
 
 		this->_graphics = graphics;
-		this->Update(std::min(ELAPSED_TIME_MS, MAX_FRAME_TIME));
+		this->Update((float)std::min(ELAPSED_TIME_MS, MAX_FRAME_TIME));
 		LAST_UPDATE_TIME = CURRENT_TIME_MS;
 
 		this->Draw(graphics);
@@ -133,9 +133,9 @@ void Game::Draw(Graphics &graphics)
 void Game::Update(float elapsedTime) 
 {
 	this->_player.Update(elapsedTime);
-	this->_level.Update(elapsedTime);
+	this->_level.Update((int)elapsedTime, this->_player);
 
-	this->_hud.Update(elapsedTime);
+	this->_hud.Update((int)elapsedTime, this->_player);
 	//check collisions
 	std::vector<Rectangle> others;
 	if ((others = this->_level.CheckTileCollisions(this->_player.GetBoundingBox())).size() > 0)
@@ -154,6 +154,15 @@ void Game::Update(float elapsedTime)
 	std::vector<Door> otherDoors;
 	if ((otherDoors = this->_level.CheckDoorCollisions(this->_player.GetBoundingBox())).size() > 0)
 	{
+		this->_player.IsInvincible(true);
 		this->_player.HandleDoorCollision(otherDoors, this->_level, this->_graphics);
+		this->_player.IsInvincible(false);
+	}
+
+	//check enemies
+	std::vector<Enemy*> otherEnemies;
+	if ((otherEnemies = this->_level.CheckEnemyCollisions(this->_player.GetBoundingBox())).size() > 0)
+	{
+		this->_player.HandleEnemyCollision(otherEnemies);
 	}
 }

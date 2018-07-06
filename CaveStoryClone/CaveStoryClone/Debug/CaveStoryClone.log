@@ -1,44 +1,15 @@
-﻿  Level.cpp
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\slope.h(17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\door.h(12): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(163): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(205): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(217): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(268): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(267): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(266): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(265): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(286): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(298): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(306): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(310): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(309): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(312): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(311): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(335): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(354): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(72): warning C4101: 'path': unreferenced local variable
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(400): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(409): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(413): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(422): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(435): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\level.cpp(448): warning C4018: '<': signed/unsigned mismatch
+﻿  AnimatedSprite.cpp
+  AnimatedTile.cpp
+  Enemy.cpp
+  Game.cpp
+  Graphics.cpp
+  HUD.cpp
+  Input.cpp
+  Level.cpp
+  Main.cpp
   Player.cpp
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\slope.h(17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\door.h(12): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(157): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(174): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(179): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(182): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(194): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(199): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(205): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(210): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(219): warning C4018: '<': signed/unsigned mismatch
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(224): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(225): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(243): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\will.stern\source\repos\cavestoryclone\cavestoryclone\player.cpp(248): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Sprite.cpp
+  Tile.cpp
+  tinyxml2.cpp
   Generating Code...
   CaveStoryClone.vcxproj -> C:\Users\will.stern\source\repos\CaveStoryClone\Debug\CaveStoryClone.exe

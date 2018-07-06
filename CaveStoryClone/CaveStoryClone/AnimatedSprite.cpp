@@ -67,7 +67,7 @@ void AnimatedSprite::Update(int elapsedTime)
 	if (this->_timeElapsed > this->_timeToUpdate)
 	{
 		this->_timeElapsed -= _timeToUpdate;
-		if(this->_frameIndex < this->_animations[this->_currentAnimation].size() -1)
+		if((unsigned int)this->_frameIndex < this->_animations[this->_currentAnimation].size() - 1)
 		{
 			this->_frameIndex++;
 		}
@@ -89,8 +89,8 @@ void AnimatedSprite::Draw(Graphics &graphics, int x, int y)
 		SDL_Rect destinationRectangle;
 		destinationRectangle.x = x + this->_offsets[this->_currentAnimation].x;
 		destinationRectangle.y = y + this->_offsets[this->_currentAnimation].y;
-		destinationRectangle.w = this->_sourceRect.w * globals::SPRITE_SCALE;
-		destinationRectangle.h = this->_sourceRect.h * globals::SPRITE_SCALE;
+		destinationRectangle.w = this->_sourceRect.w * (int)globals::SPRITE_SCALE;
+		destinationRectangle.h = this->_sourceRect.h * (int)globals::SPRITE_SCALE;
 
 		SDL_Rect sourceRect = this->_animations[this->_currentAnimation][this->_frameIndex];
 		graphics.BlitSurface(this->_spriteSheet, &sourceRect, &destinationRectangle);

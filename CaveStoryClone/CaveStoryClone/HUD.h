@@ -11,7 +11,7 @@ public:
 	HUD();
 	HUD(Graphics &graphics, Player &player);
 
-	void Update(int elapsedTime);
+	void Update(int elapsedTime, Player &player);
 	void Draw(Graphics &graphics);
 
 private:

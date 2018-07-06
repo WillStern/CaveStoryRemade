@@ -57,6 +57,9 @@
     <ClCompile Include="HUD.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -105,6 +108,9 @@
       <Filter>Source Files\headers</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
+      <Filter>Source Files\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Source Files\headers</Filter>
     </ClInclude>
   </ItemGroup>

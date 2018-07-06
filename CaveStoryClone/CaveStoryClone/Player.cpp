@@ -21,7 +21,8 @@ Player::Player(Graphics &graphics, Vector2 spawnPoint) :
 	_lookingDown(false),
 	_lookingUp(false),
 	_maxHealth(3),
-	_currentHealth(3)
+	_currentHealth(3),
+	_isInvincible(false)
 {
 	graphics.LoadImage("Content/Sprites/MyChar.png");
 
@@ -154,7 +155,7 @@ void Player::Jump()
 void Player::HandleTileCollisions(std::vector<Rectangle> &others)
 {
 	//figure out what side the collision happened on and move player accordingly
-	for (int i=0; i < others.size(); i++)
+	for (unsigned int i=0; i < others.size(); i++)
 	{
 		sides::Side collisionSide = Sprite::GetCollisionSide(others.at(i));
 		if (collisionSide != sides::NONE)
@@ -171,15 +172,15 @@ void Player::HandleTileCollisions(std::vector<Rectangle> &others)
 				}
 				break;
 			case sides::BOTTOM:
-				this->_y = others.at(i).GetTop() - this->_boundingBox.GetHeight() - 1;
+				this->_y = (float)(others.at(i).GetTop() - this->_boundingBox.GetHeight() - 1);
 				this->_dy = 0;
 				this->_grounded = true;
 				break;
 			case sides::LEFT:
-				this->_x = others.at(i).GetRight() + 1;
+				this->_x = (float)(others.at(i).GetRight() + 1);
 				break;
 			case sides::RIGHT:
-				this->_x = others.at(i).GetLeft() - this->_boundingBox.GetWidth() - 1;
+				this->_x = (float)(others.at(i).GetLeft() - this->_boundingBox.GetWidth() - 1);
 				break;
 			}
 
@@ -191,23 +192,23 @@ void Player::HandleTileCollisions(std::vector<Rectangle> &others)
 //handles collisions with all slopes player is colliding with
 void Player::HandleSlopeCollisions(std::vector<Slope> &others)
 {
-	for (int i=0; i<others.size(); i++)
+	for (unsigned int i=0; i<others.size(); i++)
 	{
 		//Calculate where on the slope the players bottom center is touching
 		//use y= mx + b to figure out y position to place them
 		//calculate b (slope intercept) by using one of the points (b = y - mx)
-		int b = others.at(i).GetP1().y - (others.at(i).GetSlope() * fabs(others.at(i).GetP1().x));
+		int b = others.at(i).GetP1().y - (int)(others.at(i).GetSlope() * fabs(others.at(i).GetP1().x));
 
 		//then get the players center x
 		int centerX = this->_boundingBox.GetCenterX();
 
 		//pass that x into the equation to get the new y position
-		int newY = (others.at(i).GetSlope() * centerX) + b - 8; //8 is a temp fix to a problem
+		int newY = (int)(others.at(i).GetSlope() * centerX) + b - 8; //8 is a temp fix to a problem
 
 		//reposition player to correct y
 		if (this->_grounded)
 		{
-			this->_y = newY - this->_boundingBox.GetHeight();
+			this->_y = (float)(newY - this->_boundingBox.GetHeight());
 			this->_grounded = true;
 		}
 	}
@@ -216,15 +217,30 @@ void Player::HandleSlopeCollisions(std::vector<Slope> &others)
 //Checks if player is grounded and is holding the down arrow
 void Player::HandleDoorCollision(std::vector<Door> &others, Level &level, Graphics &graphics)
 {
-	for (int i = 0; i< others.size(); i++)
+	for (unsigned int i = 0; i< others.size(); i++)
 	{
 		if (this->_grounded == true && this->_lookingDown == true)
 		{
 			level = Level(others.at(i).GetDestination(), graphics);
-			this->_x = level.GetPlayerSpawnPoint().x;
-			this->_y = level.GetPlayerSpawnPoint().y;
+			this->_x = (float)level.GetPlayerSpawnPoint().x;
+			this->_y = (float)level.GetPlayerSpawnPoint().y;
 		}
 	}
+}
+
+void Player::HandleEnemyCollision(std::vector<Enemy*> &others)
+{
+	for (unsigned int i = 0; i < others.size(); i++)
+	{
+		others.at(i)->TouchPlayer(this);
+		//activate invincibility frames
+		//this->_isInvincible = true;
+	}
+}
+
+void Player::GainHealth(int amt)
+{
+	this->_currentHealth += amt;
 }
 
 void Player::Update(float elapsedTime)
@@ -240,10 +256,11 @@ void Player::Update(float elapsedTime)
 	//move by dy
 	this->_y += this->_dy * elapsedTime;
 
-	AnimatedSprite::Update(elapsedTime);
+
+	AnimatedSprite::Update((int)elapsedTime);
 }
 
 void Player::Draw(Graphics &graphics)
 {
-	AnimatedSprite::Draw(graphics, this->_x, this->_y);
+	AnimatedSprite::Draw(graphics, (int)this->_x, (int)this->_y);
 }

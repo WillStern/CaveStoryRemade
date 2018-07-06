@@ -14,7 +14,7 @@ public:
 	{
 		if (this->_p2.x - this->_p1.x != 0)
 		{
-			this->_slope = (fabs(this->_p2.y) - fabs(this->_p1.y)) / (fabs(this->_p2.x) - fabs(this->_p1.x));
+			this->_slope = (float)(abs(this->_p2.y) - abs(this->_p1.y)) / (float)(abs(this->_p2.x) - abs(this->_p1.x));
 		}
 	}
 

@@ -22,7 +22,7 @@ Sprite::Sprite(Graphics &graphics, const std::string &filePath, int sourceX, int
 		printf("\nError: Unable to load image\n");
 	}
 
-	this->_boundingBox = Rectangle(_x, _y, width * globals::SPRITE_SCALE, height * globals::SPRITE_SCALE);
+	this->_boundingBox = Rectangle((int)_x, (int)_y, width * (int)globals::SPRITE_SCALE, height * (int)globals::SPRITE_SCALE);
 
 }
 
@@ -38,7 +38,7 @@ void Sprite::Draw(Graphics &graphics, int x, int y)
 
 void Sprite::Update()
 {
-	this->_boundingBox = Rectangle(this->_x, this->_y, this->_sourceRect.w * globals::SPRITE_SCALE, this->_sourceRect.h * globals::SPRITE_SCALE);
+	this->_boundingBox = Rectangle((int)this->_x, (int)this->_y, this->_sourceRect.w * (int)globals::SPRITE_SCALE, this->_sourceRect.h * (int)globals::SPRITE_SCALE);
 }
 
 const Rectangle Sprite::GetBoundingBox() const

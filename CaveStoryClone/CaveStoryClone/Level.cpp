@@ -2,6 +2,8 @@
 #include "Graphics.h"
 #include "Rectangle.h"
 #include "Utils.h"
+#include "Enemy.h"
+#include "Player.h"
 
 #include "tinyxml2.h"
 
@@ -69,7 +71,6 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 		{
 			int firstgid;
 			const char* source = pTileset->Attribute("source"); // was: const char* source = pTileset->FirstChildElement("image")->Attribute("source");
-			char* path;
 			std::stringstream ss;
 			ss << source;
 			pTileset->QueryIntAttribute("firstgid", &firstgid);
@@ -160,7 +161,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 							int gid = pTile->IntAttribute("gid");
 							Tileset tls;
 							int closest = 0;
-							for (int i=0;i<_tilesets.size();i++)
+							for (unsigned int i=0;i<_tilesets.size();i++)
 							{
 								if (this->_tilesets[i].FirstGid <= gid)
 								{
@@ -202,7 +203,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 							//Build the tile and add it to the level's tile list
 							bool isAnimatedTile = false;
 							AnimatedTileInfo ati;
-							for (int i=0; i< this->_animatedTileInfos.size(); i++)
+							for (unsigned int i=0; i< this->_animatedTileInfos.size(); i++)
 							{
 								if (this->_animatedTileInfos.at(i).StartTileId == gid)
 								{
@@ -214,7 +215,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 							if (isAnimatedTile)
 							{
 								std::vector<Vector2> tilesetPositions;
-								for (int i = 0; i < ati.TileIds.size(); i++)
+								for (unsigned int i = 0; i < ati.TileIds.size(); i++)
 								{
 									tilesetPositions.push_back(this->GetTilesetPosition(tls, ati.TileIds.at(i), tileWidth, tileHeight));
 								}
@@ -262,10 +263,10 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 						width = pObject->FloatAttribute("width");
 						height = pObject->FloatAttribute("height");
 						this->_collisionRects.push_back(Rectangle(
-							std::ceil(x) * globals::SPRITE_SCALE,
-							std::ceil(y) * globals::SPRITE_SCALE,
-							std::ceil(width) * globals::SPRITE_SCALE,
-							std::ceil(height) * globals::SPRITE_SCALE
+							(int)(std::ceil(x) * globals::SPRITE_SCALE),
+							(int)(std::ceil(y) * globals::SPRITE_SCALE),
+							(int)(std::ceil(width) * globals::SPRITE_SCALE),
+							(int)(std::ceil(height) * globals::SPRITE_SCALE)
 							));
 
 						pObject = pObject->NextSiblingElement("object");
@@ -283,7 +284,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 					{
 						std::vector<Vector2> points;
 						Vector2 p1;
-						p1 = Vector2(std::ceil(pObject->FloatAttribute("x")), std::ceil(pObject->FloatAttribute("y")));
+						p1 = Vector2((int)std::ceil(pObject->FloatAttribute("x")), (int)std::ceil(pObject->FloatAttribute("y")));
 
 						XMLElement* pPolyline = pObject->FirstChildElement("polyline");
 						if (pPolyline != NULL)
@@ -295,7 +296,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 							ss << pointString;
 							Utils::Split(ss.str(), pairs, ' ');
 							//now we have each of the pairs, loop through pairs and split into Vector2s, then store in points vector
-							for (int i=0; i < pairs.size(); i++)
+							for (unsigned int i=0; i < pairs.size(); i++)
 							{
 								std::vector<std::string> ps;
 								Utils::Split(pairs.at(i), ps, ',');
@@ -303,13 +304,13 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 							}
 						}
 
-						for (int i=0; i< points.size(); i += 2)
+						for (unsigned int i=0; i< points.size(); i += 2)
 						{
 							this->_slopes.push_back(Slope(
-								Vector2(	(p1.x + points.at(i < 2 ? i : i - 1).x) * globals::SPRITE_SCALE,
-											(p1.y + points.at(i < 2 ? i : i - 1).y) * globals::SPRITE_SCALE) ,
-								Vector2(	(p1.x + points.at(i < 2 ? i + 1 : i).x) * globals::SPRITE_SCALE, 
-											(p1.y + points.at(i < 2 ? i + 1 : i).y) * globals::SPRITE_SCALE) 
+								Vector2(	(p1.x + points.at(i < 2 ? i : i - 1).x) * (int)globals::SPRITE_SCALE,
+											(p1.y + points.at(i < 2 ? i : i - 1).y) * (int)globals::SPRITE_SCALE) ,
+								Vector2(	(p1.x + points.at(i < 2 ? i + 1 : i).x) * (int)globals::SPRITE_SCALE,
+											(p1.y + points.at(i < 2 ? i + 1 : i).y) * (int)globals::SPRITE_SCALE)
 							));
 						}
 
@@ -332,7 +333,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 						ss << name;
 						if (ss.str() == "player")
 						{
-							this->_spawnPoint = Vector2(std::ceil(x) * globals::SPRITE_SCALE, std::ceil(y) * globals::SPRITE_SCALE);
+							this->_spawnPoint = Vector2((int)(std::ceil(x) * globals::SPRITE_SCALE), (int)(std::ceil(y) * globals::SPRITE_SCALE));
 						}
 
 						pObject = pObject->NextSiblingElement("object");
@@ -351,7 +352,7 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 						float y = pObject->FloatAttribute("y");
 						float w = pObject->FloatAttribute("width");
 						float h = pObject->FloatAttribute("height");
-						Rectangle rect = Rectangle(x, y, w, h);
+						Rectangle rect = Rectangle((int)x, (int)y, (int)w, (int)h);
 
 						XMLElement* pProperties = pObject->FirstChildElement("properties");
 						if (pProperties != NULL)
@@ -388,6 +389,29 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 				}
 			}
 
+			else if (ss.str() == "enemies")
+			{
+				float x, y;
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL)
+				{
+					while (pObject)
+					{
+						x = pObject->FloatAttribute("x");
+						y = pObject->FloatAttribute("y");
+						const char* name = pObject->Attribute("name");
+						std::stringstream ss;
+						ss << name;
+						if (ss.str() == "bat")
+						{
+							this->_enemies.push_back(new Bat(graphics, Vector2((int)(std::floor(x) * globals::SPRITE_SCALE), (int)(std::floor(y) * globals::SPRITE_SCALE))));
+						}
+
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
 	}
@@ -395,31 +419,39 @@ void Level::LoadMap(std::string mapName, Graphics &graphics)
 
 }
 
-void Level::Update(int elapsedTime)
+void Level::Update(int elapsedTime, Player &player)
 {
-	for (int i =0; i< this->_animatedTileList.size(); i++)
+	for (unsigned int i =0; i< this->_animatedTileList.size(); i++)
 	{
 		this->_animatedTileList.at(i).Update(elapsedTime);
+	}
+	for (unsigned int i=0; i<this->_enemies.size(); i++)
+	{
+		this->_enemies.at(i)->Update(elapsedTime, player);
 	}
 }
 
 void Level::Draw(Graphics &graphics)
 {
 	//draw the background
-	for (int i = 0; i < this->_tileList.size(); i++)
+	for (unsigned int i = 0; i < this->_tileList.size(); i++)
 	{
 		this->_tileList.at(i).Draw(graphics);
 	}
-	for (int i =0; i< this->_animatedTileList.size(); i++)
+	for (unsigned int i =0; i< this->_animatedTileList.size(); i++)
 	{
 		this->_animatedTileList.at(i).Draw(graphics);
+	}
+	for (unsigned int i = 0; i < this->_enemies.size(); i++)
+	{
+		this->_enemies.at(i)->Draw(graphics);
 	}
 }
 
 std::vector<Rectangle> Level::CheckTileCollisions(const Rectangle &other)
 {
 	std::vector<Rectangle> others;
-	for (int i =0; i< this->_collisionRects.size(); i++)
+	for (unsigned int i =0; i< this->_collisionRects.size(); i++)
 	{
 		if (this->_collisionRects.at(i).CollidesWith(other))
 		{
@@ -432,7 +464,7 @@ std::vector<Rectangle> Level::CheckTileCollisions(const Rectangle &other)
 std::vector<Slope> Level::CheckSlopeCollisions(const Rectangle &other)
 {
 	std::vector<Slope> others;
-	for (int i =0; i<this->_slopes.size(); i++)
+	for (unsigned int i =0; i<this->_slopes.size(); i++)
 	{
 		if (this->_slopes.at(i).CollidesWith(other)) 
 		{
@@ -445,11 +477,24 @@ std::vector<Slope> Level::CheckSlopeCollisions(const Rectangle &other)
 std::vector<Door> Level::CheckDoorCollisions(const Rectangle &other)
 {
 	std::vector<Door> others;
-	for (int i = 0; i < this->_doorList.size(); i++)
+	for (unsigned int i = 0; i < this->_doorList.size(); i++)
 	{
 		if (this->_doorList.at(i).CollidesWith(other))
 		{
 			others.push_back(this->_doorList.at(i));
+		}
+	}
+	return others;
+}
+
+std::vector<Enemy*> Level::CheckEnemyCollisions(const Rectangle &other)
+{
+	std::vector<Enemy*> others;
+	for (unsigned int i = 0; i < this->_enemies.size(); i++)
+	{
+		if (this->_enemies.at(i)->GetBoundingBox().CollidesWith(other))
+		{
+			others.push_back(this->_enemies.at(i));
 		}
 	}
 	return others;

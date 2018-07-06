@@ -9,7 +9,7 @@ class Door : public Rectangle
 public:
 	Door() {}
 	Door(Rectangle r, std::string destination) :
-		Rectangle(r.GetLeft() * globals::SPRITE_SCALE, r.GetTop() * globals::SPRITE_SCALE, r.GetWidth() * globals::SPRITE_SCALE, r.GetHeight() * globals::SPRITE_SCALE),
+		Rectangle(r.GetLeft() * (int)globals::SPRITE_SCALE, r.GetTop() * (int)globals::SPRITE_SCALE, r.GetWidth() * (int)globals::SPRITE_SCALE, r.GetHeight() * (int)globals::SPRITE_SCALE),
 		_destination(destination)
 	{}
 

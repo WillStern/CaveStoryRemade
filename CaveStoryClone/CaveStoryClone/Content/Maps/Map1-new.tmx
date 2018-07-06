@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="20" height="16" tilewidth="16" tileheight="16" infinite="0" nextobjectid="38">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="20" height="16" tilewidth="16" tileheight="16" infinite="0" nextobjectid="39">
  <tileset firstgid="1" source="../Tilesets/PrtCave.tsx"/>
  <tileset firstgid="81" source="../TileSets/NpcSym.tsx"/>
  <layer name="Background" width="20" height="16">
@@ -651,7 +651,7 @@
   </data>
  </layer>
  <objectgroup name="doors">
-  <object id="37" x="147.333" y="50" width="9.33333" height="11">
+  <object id="37" name="To Map 2" x="150.667" y="50" width="4.66666" height="11">
    <properties>
     <property name="destination" value="Map 2"/>
    </properties>
@@ -697,8 +697,17 @@
    <polyline points="0,0 10.6667,-8"/>
   </object>
  </objectgroup>
- <objectgroup name="spawn points">
+ <objectgroup color="#00ff00" name="spawn points">
   <object id="19" name="player" x="158.5" y="127.5" width="4.5" height="4">
+   <properties>
+    <property name="arrived from" value="spawn"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="38" name="player" x="128.666" y="50" width="6" height="5.33333">
+   <properties>
+    <property name="arrived from" value="Map 2"/>
+   </properties>
    <ellipse/>
   </object>
  </objectgroup>

@@ -10,7 +10,9 @@
 #include <vector>
 
 //forward declare
+class Enemy;
 class Graphics;
+class Player;
 struct SDL_Texture;
 struct SDL_Rect;
 struct Tileset;
@@ -22,12 +24,13 @@ public:
 	Level(std::string mapName, Graphics &graphics);
 	~Level();
 
-	void Update(int elapsedTime);
+	void Update(int elapsedTime, Player &player);
 	void Draw(Graphics &graphics);
 
 	std::vector<Rectangle> CheckTileCollisions(const Rectangle &other);
 	std::vector<Slope> CheckSlopeCollisions(const Rectangle &other);
 	std::vector<Door> CheckDoorCollisions(const Rectangle &other);
+	std::vector<Enemy*> CheckEnemyCollisions(const Rectangle &other);
 
 	const Vector2 GetPlayerSpawnPoint() const;
 private:
@@ -49,6 +52,8 @@ private:
 	std::vector<AnimatedTileInfo> _animatedTileInfos;
 
 	std::vector<Door> _doorList;
+
+	std::vector<Enemy*> _enemies;
 
 	/*LoadMap
 	Loads a map
